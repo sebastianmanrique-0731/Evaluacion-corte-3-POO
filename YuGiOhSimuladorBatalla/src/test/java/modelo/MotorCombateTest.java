@@ -4,10 +4,6 @@
  */
 package modelo;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,46 +12,67 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author sebas
  */
 public class MotorCombateTest {
-    
-    public MotorCombateTest() {
+
+    @Test
+    public void testAtaqueVsAtaqueMayor() {
+        MotorCombate motor = new MotorCombate();
+        Jugador j1 = new Jugador();
+        j1.inicializarDuelista("Yugi", 4000);
+        Jugador j2 = new Jugador();
+        j2.inicializarDuelista("Kaiba", 4000);
+
+        MonstruoNormal c1 = new MonstruoNormal();
+        c1.configurarDatos("Dragón Blanco", 3000, 2500, Carta.POS_ATAQUE);
+
+        MonstruoNormal c2 = new MonstruoNormal();
+        c2.configurarDatos("Mago Oscuro", 2500, 2100, Carta.POS_ATAQUE);
+
+        int danoCalculado = motor.calcularDano(c1, c2);
+        assertEquals(500, danoCalculado);
+
+        motor.ejecutarAtaque(j1, c1, j2, c2);
+        assertEquals(3500, j2.consultarLP());
+        assertTrue(c2.isDestruida());
+        assertFalse(c1.isDestruida());
     }
 
-    @org.junit.jupiter.api.BeforeAll
-    public static void setUpClass() throws Exception {
+    @Test
+    public void testAtaqueVsDefensaMenorRecibeDanoAtacante() {
+        MotorCombate motor = new MotorCombate();
+        Jugador j1 = new Jugador();
+        j1.inicializarDuelista("Joey", 4000);
+        Jugador j2 = new Jugador();
+        j2.inicializarDuelista("Yugi", 4000);
+
+        MonstruoNormal c1 = new MonstruoNormal();
+        c1.configurarDatos("Espadachín de la Llama", 1800, 1600, Carta.POS_ATAQUE);
+
+        MonstruoNormal c2 = new MonstruoNormal();
+        c2.configurarDatos("Elfo Místico", 800, 2000, Carta.POS_DEFENSA);
+
+        int dano = motor.calcularDano(c1, c2);
+        assertEquals(200, dano);
+
+        motor.ejecutarAtaque(j1, c1, j2, c2);
+        assertEquals(3800, j1.consultarLP());
+        assertEquals(4000, j2.consultarLP());
+        assertFalse(c2.isDestruida());
     }
 
-    @org.junit.jupiter.api.AfterAll
-    public static void tearDownClass() throws Exception {
-    }
+    @Test
+    public void testAtaqueDirectoConMonstruoEfecto() {
+        MotorCombate motor = new MotorCombate();
+        Jugador j1 = new Jugador();
+        j1.inicializarDuelista("Yugi", 4000);
+        Jugador j2 = new Jugador();
+        j2.inicializarDuelista("Marik", 4000);
 
-    @org.junit.jupiter.api.BeforeEach
-    public void setUp() throws Exception {
-    }
+        Carta c1 = new MonstruoEfecto("Maga Oscura", 2000, 1700, Carta.POS_ATAQUE, 300);
 
-    @org.junit.jupiter.api.AfterEach
-    public void tearDown() throws Exception {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
+        int dano = motor.calcularDano(c1, null);
+        assertEquals(2300, dano);
 
-    @org.junit.jupiter.api.Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        motor.ejecutarAtaque(j1, c1, j2, null);
+        assertEquals(1700, j2.consultarLP());
     }
-    
 }
