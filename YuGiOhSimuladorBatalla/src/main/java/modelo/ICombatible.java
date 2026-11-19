@@ -8,6 +8,9 @@ package modelo;
  *
  * @author sebas
  */
-public class ICombatible {
-    
+public interface ICombatible {
+
+    int obtenerPoderCombate();
+
+    String mostrarResumen();
 }

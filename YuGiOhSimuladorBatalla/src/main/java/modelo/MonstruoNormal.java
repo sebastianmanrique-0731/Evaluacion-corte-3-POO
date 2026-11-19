@@ -8,6 +8,20 @@ package modelo;
  *
  * @author sebas
  */
-public class MonstruoNormal {
-    
+public class MonstruoNormal extends Carta {
+
+    @Override
+    public int obtenerPoderCombate() {
+        return POS_ATAQUE.equalsIgnoreCase(this.posicion) ? this.puntosAtaque : this.puntosDefensa;
+    }
+
+    @Override
+    public String mostrarResumen() {
+        return "[Normal] " + toString();
+    }
+
+    @Override
+    public String activarEspecial() {
+        return nombre + " mantiene su postura normal sin efecto adicional.";
+    }
 }

@@ -1,0 +1,5 @@
+[2026-11-18 21:34:08] ATQ vs ATQ: majin buu (3000) destruye a Mago Oscuro (2800). Jugador 2 (Kaiba) pierde 200 LP (LP: 3800).
+[2026-11-18 21:34:24] ATQ vs ATQ: Mago Oscuro (2800) es destruido por majin buu (3000). Jugador 2 (Kaiba) pierde 200 LP (LP: 3600).
+[2026-11-18 21:47:06] ATQ vs DEF: Goku (3300) destruye a majin buu en defensa (2500). Daño a LP: 0.
+[2026-11-18 22:32:11] ATAQUE DIRECTO: vegeta (2800) inflige 2800 de daño directo a Jugador 2 (Kaiba) (LP: 1200).
+[2026-11-18 22:33:18] ATQ vs ATQ: freezer (1500) es destruido por vegeta (2800). Jugador 2 (Kaiba) pierde 1300 LP (LP: 0).
